@@ -1,19 +1,24 @@
 #!/usr/bin/env python
 
-import socket
-from telnetlib import Telnet
-from prettytable import PrettyTable
+# socket module is imported to provide low-level network communication.
+import socket 
+# Telnet class from telnetlib module is imported to establish a Telnet connection to the routers.
+from telnetlib import Telnet 
+# PrettyTable class from prettytable module is imported to create a well-formatted table for displaying information.
+from prettytable import PrettyTable 
+# InventoryManager class and DataLoader class from ansible.inventory.manager and ansible.parsing.dataloader modules are imported to manage Ansible inventory and load inventory data respectively.
 from ansible.inventory.manager import InventoryManager
 from ansible.parsing.dataloader import DataLoader
 
-loader = DataLoader()
-inventory = InventoryManager(loader=loader, sources=['/etc/ansible/hosts'])
+loader = DataLoader() # loader is an instance of DataLoader used to load inventory data from Ansible.
+inventory = InventoryManager(loader=loader, sources=['/etc/ansible/hosts']) # inventory is an instance of InventoryManager used to manage the inventory and retrieve host information.
 
 for host in inventory.get_hosts('routers'):
     ansible_host = host.get_vars()['ansible_host']
     ansible_user = host.get_vars()['ansible_user']
     ansible_password = host.get_vars()['ansible_password']
     enable_password = host.get_vars()['ansible_enable']
+    
     def show_users_telnet():
         tn = Telnet(ansible_host)
 
