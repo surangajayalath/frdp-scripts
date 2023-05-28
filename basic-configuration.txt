@@ -1,0 +1,27 @@
+# Router telnet configuration
+
+Router(config)#hostname R1
+R1(config)#enable password qwert
+R1(config-line)#line vty 0 4
+R1(config-line)#username suranga privilege 15 password qwert
+R1(config-line)#transport input telnet
+R1(config-line)#login local
+R1(config-line)# do copy running-config startup-config
+
+# Switch telnet configuration
+Switch(config)#hostname ESW1
+ESW1(config)#enable password qwert
+ESW1(config-line)#line vty 0 4
+ESW1(config-line)#username suranga privilege 15 password qwert
+ESW1(config-line)#transport input telnet
+ESW1(config-line)#login local
+ESW1(config-line)# do copy running-config startup-config
+
+# Administrator PC default gateway configuration
+route add default gw 192.168.31.120
+
+# Routers configuration for communication between different network
+R1(config)#router eigrp 100
+R1(config-router)#network 192.168.31.0 0.0.0.255
+R1(config-router)#network 192.168.32.0 0.0.0.255
+R1(config-router)#network 192.168.33.0 0.0.0.255
