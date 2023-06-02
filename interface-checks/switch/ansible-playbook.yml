@@ -1,0 +1,11 @@
+---
+- hosts: routers
+  gather_facts: no
+  tasks:
+    - name: Execute Python script
+      command: python3 interface-check-switch.py
+      register: script_output
+
+    - name: Print script output
+      debug:
+        var: script_output.stdout_lines
