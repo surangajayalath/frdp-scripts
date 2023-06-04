@@ -35,7 +35,7 @@ for host in inventory.get_hosts('switch'):
         tn.read_until(b'#')
         tn.write(b'show run | include service password-encryption\n')
 
-        # Read the command output and decode it as UTF-8
+        # The decode('utf-8') part is used to convert the bytes received from the Telnet connection into a human-readable string format using the UTF-8 encoding.
         stdout = tn.read_until(b'#').decode('utf-8')
         lines = stdout.split('\n')
 
