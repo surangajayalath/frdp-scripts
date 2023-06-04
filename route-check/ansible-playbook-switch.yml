@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Execute Python script
+      command: python3 check-ip-route-switch.py
+      register: script_output
+      no_log: true
+
+    - name: Print script output
+      debug:
+        var: script_output.stdout_lines
