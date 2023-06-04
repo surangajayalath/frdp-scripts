@@ -1,0 +1,9 @@
+# List of routers connected to network
+[routers]
+R1 ansible_host=192.168.31.121 ansible_user=suranga ansible_password=qwert ansible_enable=1234 ansible_connection=network_cli ansible_network_os=ios
+R2 ansible_host=192.168.31.120 ansible_user=suranga ansible_password=qwert ansible_enable=1234 ansible_connection=network_cli ansible_network_os=ios
+
+# List of switches connected to network
+[switch]
+S1 ansible_host=192.168.33.123 ansible_user=suranga ansible_password=qwert ansible_enable=qwert ansible_connection=network_cli ansible_network_os=ios
+S2 ansible_host=192.168.32.121 ansible_user=suranga ansible_password=qwert ansible_enable=qwert ansible_connection=network_cli ansible_network_os=ios
