@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
     - name: Execute Python script
-      command: python3 check-ip-route.py
+      command: python3 check-ip-route-router.py
       register: script_output
 
     - name: Print script output
