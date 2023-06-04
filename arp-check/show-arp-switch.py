@@ -36,7 +36,7 @@ for host in inventory.get_hosts('switch'):
         tn.read_until(b'#')
         tn.write(b'show arp\n')
 
-        # Read the output until the command prompt and decode it as UTF-8
+        # The decode('utf-8') part is used to convert the bytes received from the Telnet connection into a human-readable string format using the UTF-8 encoding.
         stdout = tn.read_until(b'#').decode('utf-8')
 
         # Split the output into lines
