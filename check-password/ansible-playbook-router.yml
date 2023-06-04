@@ -1,9 +1,9 @@
 ---
-- hosts: routers
+- hosts: localhost
   gather_facts: no
   tasks:
     - name: Execute Python script
-      command: python3 check-password-encryption.py
+      command: python3 check-password-encryption-router.py
       register: script_output
 
     - name: Print script output
