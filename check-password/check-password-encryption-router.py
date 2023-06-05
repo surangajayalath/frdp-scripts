@@ -36,7 +36,7 @@ for host in inventory.get_hosts('routers'):
         tn.read_until(b'#')
         tn.write(b'show run | include service password-encryption\n')
 
-        # The decode('utf-8') part is used to convert the bytes received from the Telnet connection into a human-readable string format using the UTF-8 encoding.
+        # Read the output until the command prompt and decode it as UTF-8
         stdout = tn.read_until(b'#').decode('utf-8')
 
         # Split the output into lines
@@ -49,7 +49,8 @@ for host in inventory.get_hosts('routers'):
         for line in lines:
             # Check if the line contains the text 'no service password-encryption'
             if 'no service password-encryption' in line:
-                print("Password encryption is not available.")
+                print("Password encryption is not available. Enabling it...")
+                enable_password_encryption(tn)
                 break
         else:
             # If the loop completes without encountering the 'break' statement,
@@ -57,8 +58,18 @@ for host in inventory.get_hosts('routers'):
             print("Password encryption is enabled.")
             print(stdout)
 
-    # Call the function to retrieve the output from the Telnet connection
-    up_lines = show_users_telnet()
+    def enable_password_encryption(tn):
 
-    # Extract the list of open ports from the output if available, otherwise set it to an empty list
-    ports = [line.split()[0] for line in up_lines] if up_lines else []
+        # Send the command to enable password encryption
+        tn.write(b'configure terminal\n')
+        tn.read_until(b'#')
+        tn.write(b'service password-encryption\n')
+        tn.read_until(b'#')
+
+
+        # Print a message indicating successful encryption
+        print("Password encryption enabled successfully.")
+
+    # Call the function to retrieve the output from the Telnet connection
+    show_users_telnet()
+
