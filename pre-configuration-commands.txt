@@ -25,3 +25,4 @@ R1(config)#router eigrp 100
 R1(config-router)#network 192.168.31.0 0.0.0.255
 R1(config-router)#network 192.168.32.0 0.0.0.255
 R1(config-router)#network 192.168.33.0 0.0.0.255
+R1(config-router)#network 10.10.10.0 0.0.0.255
